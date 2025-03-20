@@ -1,20 +1,16 @@
-import ListGroup from "./components/ListGroup"
-import Logo from "./components/Logo"
 import ShrinkOnScroll from "./components/ShrinkOnScroll"
-import react from "./assets/react.svg";
+import logo from "./assets/logo.png";
 
 
 function App() {
 
   return (
     <>
-    <div style={{height: "40vh"}}></div>
-<Logo/>
-<div><ListGroup/></div>
-<ShrinkOnScroll>
-  <img src={react} alt="logo" style={{ height: "100%" }} />
+    <div style={{height: "50vh"}}></div>
+<ShrinkOnScroll threshold={300} largeSize="350px" smallSize="115px">
+  <img src={logo} alt="logo" style={{ height: "100%" }} />
 </ShrinkOnScroll>
-<div style={{height: "100vh"}}></div>
+<div style={{height: "85vh"}}></div>
 
     </>
   )
