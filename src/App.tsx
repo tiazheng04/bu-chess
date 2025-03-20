@@ -8,6 +8,7 @@ function App() {
 
   return (
     <>
+    <div style={{height: "40vh"}}></div>
 <Logo/>
 <div><ListGroup/></div>
 <ShrinkOnScroll>

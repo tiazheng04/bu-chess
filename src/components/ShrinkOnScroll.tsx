@@ -1,43 +1,74 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react"; // import React hooks and types
 
-// define the props type: anything inside the component (children) + optional threshold
+// props are kinda like varariables that you pass through the component (like the value you pass into functions)
 type Props = {
-  children: ReactNode;  // whatever you pass inside the component (image, text, div, etc.)
-  threshold?: number;   // optional scroll distance in pixels before shrinking happens
-  largeSize?: string;          // size before scrolling
-  smallSize?: string;          // size after shrinking
-
+  children: ReactNode;    // content inside the component that we want to resize
+  threshold?: number;     // scroll distance in px where max shrinking is gonna be
+  largeSize?: string;     // starting height of the object size before any scroll 
+  smallSize?: string;     // ending height of the object after reaching threshold scroll distance
 };
 
-function ShrinkOnScroll({ children, threshold = 50, largeSize = "80px", smallSize = "40px" }: Props) {
-  // state to track if the component should shrink or stay normal
-  const [small, setSmall] = useState(false);
 
-  // this effect will run once when the component mounts
+function ShrinkOnScroll({
+    //default values for props if none are provided
+  children,
+  threshold = 200,        
+  largeSize = "80px",     
+  smallSize = "40px",     
+}: Props) {
+
+  // state to store the current height of the component as a string
+  const [height, setHeight] = useState(largeSize);
+
+  // helper function to convert "80px" => 80 (strip "px" and parse as number), we need this to calculate the dynamic distance below,,,,
+  const parsePx = (value: string) => parseInt(value.replace("px", ""));
+
+  // alright so the component is loaded and this is the stuff that should be happening with the component at each moment
   useEffect(() => {
-    // event handler: checks if the user has scrolled past the threshold
+    // function that will run whenever user scrolls
     const handleScroll = () => {
-      setSmall(window.scrollY > threshold);
+      const scrollY = window.scrollY; // how far down the page we've scrolled (in px)
+      const maxScroll = threshold;    // the max scroll position we care about (we rly dont need this variaable but wtevs)
+
+      // parsing for math
+      const large = parsePx(largeSize); 
+      const small = parsePx(smallSize); 
+
+      // clamp scrollY between 0 and maxScroll (so we don't go past limits)
+      //alright i think  this is so that we don't get negative values for the reminaing pixel distance values when doing math
+      const clampedScroll = Math.min(Math.max(scrollY, 0), maxScroll);
+
+      // 0 = top of page, 1 = reached threshold
+      //little percentage equation to calculate the progress of the scroll
+      const progress = clampedScroll / maxScroll;
+
+      // calculate new height by doing math (just look at the math equation, i'm sure dont need to explain it)
+      // the more you scroll, the closer it gets to "small" size
+      const newHeight = large - (large - small) * progress;
+
+      // update the height state with the calculated height, we got our beautiful pixels string back
+      setHeight(`${newHeight}px`);
     };
 
-    // add scroll event listener when the component loads
+    // add scroll event listener to window, and so every time we scroll, we are gonna call the handleScroll function (i love copilot autofill)
     window.addEventListener("scroll", handleScroll);
 
-    // remove the event listener when the component unmounts (cleanup)
+    // call handleScroll right away so it sets initial size based on current scroll position
+    handleScroll();
+
+    //ok so when this component is out of the screen view, it unmounts i think which means we need to remove the event listener so we don't get memory leaks
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [threshold]); // re-run effect if threshold value ever changes
+  }, [threshold, largeSize, smallSize]); //these are dependencies that will trigger the useEffect function to run again if they change
 
   return (
-    // wrapper div that applies shrinking height + transition styles
+    // return the div with the dynamic height
     <div
-      className="d-flex align-items-center transition-all" // bootstrap flexbox + alignment
+      className="d-flex align-items-center" // bootstrap
       style={{
-        height: small ? smallSize : largeSize, // if scrolled past threshold = shrink
-        transition: "2s",              // smooth 0.3s animation on height change
+        height: height, // set dynamic height based on scroll
       }}
     >
-      {/* render the children inside the shrinking div */}
-      {children}
+      {children} 
     </div>
   );
 }
