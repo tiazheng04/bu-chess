@@ -1,5 +1,6 @@
 import ShrinkOnScroll from "./components/ShrinkOnScroll"
-import logo from "./assets/logo.png";
+import terrier from "./assets/terrier.png";
+
 
 
 function App() {
@@ -7,8 +8,9 @@ function App() {
   return (
     <>
     <div style={{height: "50vh"}}></div>
-<ShrinkOnScroll threshold={300} largeSize="350px" smallSize="115px">
-  <img src={logo} alt="logo" style={{ height: "100%" }} />
+<ShrinkOnScroll threshold={300} largeSize="350px" smallSize="115px" className = "d-flex align-items flex-row align-items-center justify-content-end">
+  <img src={terrier} alt="logo" style={{ height: "50%" }} />
+  <span style={{fontSize: "30%"}}>BU CHESS</span>
 </ShrinkOnScroll>
 <div style={{height: "85vh"}}></div>
 
