@@ -46,7 +46,7 @@ function Navbar({ onNavStateChange } : NavbarProps) {
           padding: 0,              
         }}
       >
-        {/* Hamburger Icon */}
+        {/* Lines to create the icon itself */}
         <span
           style={{
             display: "block",
@@ -79,7 +79,7 @@ function Navbar({ onNavStateChange } : NavbarProps) {
         />
       </button>
 
-      {/* Navigation Box */}
+      {/* Pop up navigation bar */}
       {!isCollapsed && (
         <nav
           className="navbar"
