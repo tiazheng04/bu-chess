@@ -1,16 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Navbar() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+type NavbarProps = {
+  onNavStateChange?: (open: boolean) => void;
+};
 
+// Allow Navbar to be collapsed or expanded and allow parent comonent to add blur on expansion
+function Navbar({ onNavStateChange } : NavbarProps) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const toggleNavbar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  setIsCollapsed(prev => {
+    const next = !prev;
+    if (onNavStateChange) {
+      onNavStateChange(!next); 
+    }
+    return next;
+  });
+};
 
   return (
     <>
-      {/* Hamburger Button */}
+  {/* hamburger icon which remains fixed on the top left corner */}
       <button
         className="navbar-toggler"
         type="button"
@@ -31,9 +41,42 @@ function Navbar() {
           cursor: "pointer",
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           zIndex: 1000,
+          flexDirection: "column", 
+          gap: "4px",              
+          padding: 0,              
         }}
       >
-        <span className="navbar-toggler-icon"></span>
+        {/* Hamburger Icon */}
+        <span
+          style={{
+            display: "block",
+            width: "22px",
+            height: "3px",
+            background: "#333",
+            borderRadius: "2px",
+            transition: "0.3s",
+          }}
+        />
+        <span
+          style={{
+            display: "block",
+            width: "22px",
+            height: "3px",
+            background: "#333",
+            borderRadius: "2px",
+            transition: "0.3s",
+          }}
+        />
+        <span
+          style={{
+            display: "block",
+            width: "22px",
+            height: "3px",
+            background: "#333",
+            borderRadius: "2px",
+            transition: "0.3s",
+          }}
+        />
       </button>
 
       {/* Navigation Box */}
@@ -42,19 +85,20 @@ function Navbar() {
           className="navbar"
           style={{
             position: "fixed",
-            top: "120px", 
+            top: "160px", 
             left: "1rem",
             height: "300px", 
-            width: "200px",
+            width: "180px",
             padding: "1rem",
             backgroundColor: "#ffcccc",
             border: "1px solid #ddd",
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             overflow: "hidden",
+             zIndex: 1100,
           }}
         >
-          <ul className="navbar-nav flex-column" style={{ width: "100%" }}>
+          <ul className="navbar-nav flex-column" style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <li className="nav-item">
               <Link className="nav-link active" to="/">
                 Home
