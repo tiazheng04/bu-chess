@@ -1,21 +1,32 @@
-import ShrinkOnScroll from "./components/ShrinkOnScroll"
-import terrier from "./assets/terrier.png";
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import AboutUs from "./AboutUs.tsx";
+import Tournament from "./Tournament.tsx";
+import ContactUs from "./ContactUs.tsx";
+import Home from "./Home.tsx";
 
 function App() {
-
+  const [navOpen, setNavOpen] = useState(false);
   return (
-    <>
-    <div style={{height: "50vh"}}></div>
-<ShrinkOnScroll threshold={300} largeSize="350px" smallSize="115px" className = "d-flex align-items flex-row align-items-center justify-content-end">
-  <img src={terrier} alt="logo" style={{ height: "50%" }} />
-  <span style={{fontSize: "30%"}}>BU CHESS</span>
-</ShrinkOnScroll>
-<div style={{height: "85vh"}}></div>
-
-    </>
+    <Router>
+      <Navbar onNavStateChange={setNavOpen} />
+      <div
+        id="main-content"
+        style={{
+          filter: navOpen ? "blur(2.5px)" : "none",
+          transition: "filter 0.3s",
+        }}
+      >
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/tournaments" element={<Tournament />} />
+        <Route path="/contactus" element={<ContactUs />} />
+      </Routes>
+      </div>
+    </Router>
   )
 }
 
-export default App
+export default App;
