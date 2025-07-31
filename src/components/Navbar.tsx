@@ -20,65 +20,80 @@ function Navbar({ onNavStateChange } : NavbarProps) {
 
   return (
     <>
-  {/* hamburger icon which remains fixed on the top left corner */}
-      <button
-        className="navbar-toggler"
-        type="button"
-        onClick={toggleNavbar}
-        aria-label="Toggle navigation"
+      <div
         style={{
           position: "fixed",
-          top: "1rem",
-          left: "1rem",
-          background: "#ffcccc", 
-          border: "1px solid #ddd",
-          borderRadius: "8px",
-          width: "40px",
-          height: "40px",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "60px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          zIndex: 1000,
-          flexDirection: "column", 
-          gap: "4px",              
-          padding: 0,              
+          justifyContent: "space-between",
+          background: "rgba(0,0,0,0.05)",
+          borderBottom: "1px solid red",
         }}
       >
-        {/* Lines to create the icon itself */}
-        <span
+        {/* hamburger icon which remains fixed on the top left corner */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={toggleNavbar}
+          aria-label="Toggle navigation"
           style={{
-            display: "block",
-            width: "22px",
-            height: "3px",
-            background: "#333",
-            borderRadius: "2px",
-            transition: "0.3s",
+            position: "fixed",
+            top: "1.5vh",
+            left: "1rem",
+            background: "#ffcccc", 
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            width: "40px",
+            height: "40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            zIndex: 1000,
+            flexDirection: "column", 
+            gap: "4px",              
+            padding: 0,  
+                      
           }}
-        />
-        <span
-          style={{
-            display: "block",
-            width: "22px",
-            height: "3px",
-            background: "#333",
-            borderRadius: "2px",
-            transition: "0.3s",
-          }}
-        />
-        <span
-          style={{
-            display: "block",
-            width: "22px",
-            height: "3px",
-            background: "#333",
-            borderRadius: "2px",
-            transition: "0.3s",
-          }}
-        />
-      </button>
-
+        >
+          {/* Lines to create the icon itself */}
+          <span
+            style={{
+              display: "block",
+              width: "22px",
+              height: "3px",
+              background: "#333",
+              borderRadius: "2px",
+              transition: "0.3s",
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: "22px",
+              height: "3px",
+              background: "#333",
+              borderRadius: "2px",
+              transition: "0.3s",
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: "22px",
+              height: "3px",
+              background: "#333",
+              borderRadius: "2px",
+              transition: "0.3s",
+            }}
+          />
+        </button>
+      </div>
       {/* Pop up navigation bar */}
       {!isCollapsed && (
         <nav
