@@ -14,7 +14,7 @@ function App() {
   return (
     <div style={{ minHeight: "100vh", width: "100vw", position: "relative" }}>
       <Router>
-        {/* Topbar/Navbar always above blur, with high z-index and solid background */}
+        {/* Topbar/Navbar always above blur, with high z-index */}
         <div style={{ position: "sticky", top: 0, zIndex: 100, width: "100%", background: "#f5f5f5" }}>
           <Navbar onNavStateChange={setNavOpen} />
         </div>
@@ -27,7 +27,6 @@ function App() {
             marginBottom: FOOTER_HEIGHT,
             background: "#fff",
             boxSizing: "border-box",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
             filter: navOpen ? "blur(2.5px)" : "none",
             transition: "filter 0.3s",
             display: "flex",
