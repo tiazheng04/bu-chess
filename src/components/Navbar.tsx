@@ -7,16 +7,16 @@ type NavbarProps = {
 
 // Allow Navbar to be collapsed or expanded and allow parent comonent to add blur on expansion
 function Navbar({ onNavStateChange } : NavbarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
-  setIsCollapsed(prev => {
-    const next = !prev;
-    if (onNavStateChange) {
-      onNavStateChange(!next); 
-    }
-    return next;
-  });
-};
+    setIsOpen(prev => {
+      const next = !prev;
+      if (onNavStateChange) {
+        onNavStateChange(next); 
+      }
+      return next;
+    });
+  };
 
   return (
     <>
@@ -95,7 +95,7 @@ function Navbar({ onNavStateChange } : NavbarProps) {
         </button>
       </div>
       {/* Pop up navigation bar */}
-      {!isCollapsed && (
+      {isOpen && (
         <nav
           className="navbar"
           style={{
@@ -110,7 +110,7 @@ function Navbar({ onNavStateChange } : NavbarProps) {
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             overflow: "hidden",
-             zIndex: 1100,
+            zIndex: 1100,
           }}
         >
           <ul className="navbar-nav flex-column" style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
