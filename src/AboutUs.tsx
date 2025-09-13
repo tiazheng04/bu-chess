@@ -1,9 +1,23 @@
 // shell page for about us
+import ShrinkOnScroll from "./components/ShrinkOnScroll";
+import terrier from "./assets/bu-chess-logo.png";
+
 function AboutUs() {
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
-      AboutUs
-    </div>
+    <>
+      <div style={{ height: "70vh" }}></div>
+      <ShrinkOnScroll
+        threshold={300}
+        largeSize="350px"
+        smallSize="100px"
+        className="d-flex flex-row justify-content-end"
+        shrink={false}
+      >
+        <img src={terrier} alt="logo" style={{ height: "50%" }} />
+        <span style={{ fontSize: "30%" }}>BU CHESS</span>
+      </ShrinkOnScroll>
+      <div style={{ height: "85vh" }}></div>
+    </>
   );
 }
 
