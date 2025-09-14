@@ -94,11 +94,13 @@ function ShrinkOnScroll({
       style={{
         height: height, // set dynamic height based on scroll
         fontSize: height, // set font size to match height for dynamic scaling
-        paddingRight: paddingRight,
-        position: "sticky",
+        // paddingRight: paddingRight,
+        right: shrink ? paddingRight : smallPadding,
+        position: shrink ? "sticky" : "fixed",
         top: isSticky ? "1vh" : undefined,
         marginLeft: "auto",
         width: "fit-content"
+        
       }}
     >
       {children}
