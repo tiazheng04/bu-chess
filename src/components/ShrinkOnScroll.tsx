@@ -9,6 +9,7 @@ type Props = {
   className?: string;
   largePadding?: string; // padding when the component is large
   smallPadding?: string; // padding when the component is small
+  shrink?: boolean,
 };
 
 function ShrinkOnScroll({
@@ -20,6 +21,7 @@ function ShrinkOnScroll({
   largePadding = "8vw",
   smallPadding = "2vw",
   className = "d-flex align-items flex-row align-items-center",
+  shrink = true,
   
 }: Props) {
   // state to store the current height of the component as a string
@@ -35,6 +37,14 @@ function ShrinkOnScroll({
 
   // alright so the component is loaded and this is the stuff that should be happening with the component at each moment
   useEffect(() => {
+
+    if (!shrink) {
+      setHeight(smallSize);
+      setPaddingRight(smallPadding);
+      setIsSticky(true);
+      return; // do NOT add scroll listener
+    }
+
     // function that will run whenever user scrolls
     const handleScroll = () => {
       const scrollY = window.scrollY; // how far down the page we've scrolled (in px)
@@ -75,7 +85,7 @@ function ShrinkOnScroll({
 
     //ok so when this component is out of the screen view, it unmounts i think which means we need to remove the event listener so we don't get memory leaks
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [threshold, largeSize, smallSize, largePadding, smallPadding]); //these are dependencies that will trigger the useEffect function to run again if they change
+  }, [threshold, largeSize, smallSize, largePadding, smallPadding, shrink]); //these are dependencies that will trigger the useEffect function to run again if they change
 
   return (
     // return the div with the dynamic height
@@ -84,11 +94,13 @@ function ShrinkOnScroll({
       style={{
         height: height, // set dynamic height based on scroll
         fontSize: height, // set font size to match height for dynamic scaling
-        paddingRight: paddingRight,
-        position: "sticky",
+        // paddingRight: paddingRight,
+        right: shrink ? paddingRight : smallPadding,
+        position: shrink ? "sticky" : "fixed",
         top: isSticky ? "1vh" : undefined,
         marginLeft: "auto",
         width: "fit-content"
+        
       }}
     >
       {children}

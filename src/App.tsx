@@ -6,17 +6,24 @@ import Tournament from "./Tournament.tsx";
 import ContactUs from "./ContactUs.tsx";
 import Home from "./Home.tsx";
 import Footer from "./components/Footer.tsx";
+// import PersistentLogo from "./components/PersistentLogo.tsx";
+// import { useLocation } from "react-router-dom";
+
 
 function App() {
   const [navOpen, setNavOpen] = useState(false);
   // Height of the footer (adjust as needed)
   const FOOTER_HEIGHT = 120;
+  // const isHome = location.pathname === "/";
   return (
     <div style={{ minHeight: "100vh", width: "100vw", position: "relative" }}>
       <Router>
         {/* Topbar/Navbar always above blur, with high z-index */}
         <div style={{ position: "sticky", top: 0, zIndex: 100, width: "100%", background: "#f5f5f5" }}>
           <Navbar onNavStateChange={setNavOpen} />
+            {/* <div style={{ display: isHome ? "none" : "block" }}>
+              <PersistentLogo />
+            </div> */}
         </div>
         {/* Main content is blurred when navOpen, logo inside can scroll up and visually join topbar */}
         <div
