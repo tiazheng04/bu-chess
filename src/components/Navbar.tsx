@@ -18,6 +18,14 @@ function Navbar({ onNavStateChange } : NavbarProps) {
     });
   };
 
+  // Close navbar when a link is clicked
+  const handleNavLinkClick = () => {
+    setIsOpen(false);
+    if (onNavStateChange) {
+      onNavStateChange(false);
+    }
+  };
+
   return (
     <>
       <div
@@ -115,22 +123,22 @@ function Navbar({ onNavStateChange } : NavbarProps) {
         >
           <ul className="navbar-nav flex-column" style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <li className="nav-item">
-              <Link className="nav-link active" to="/">
+              <Link className="nav-link active" to="/" onClick={handleNavLinkClick}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">
+              <Link className="nav-link" to="/about" onClick={handleNavLinkClick}>
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/tournaments">
+              <Link className="nav-link" to="/tournaments" onClick={handleNavLinkClick}>
                 Tournaments
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contactus">
+              <Link className="nav-link" to="/contactus" onClick={handleNavLinkClick}>
                 Contact Us
               </Link>
             </li>
