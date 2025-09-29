@@ -1,13 +1,15 @@
 import React from "react";
 
-type LineProps = {
+type LandingProps = {
   stroke?: string;
   strokeWidth?: number;
+  imageUrl?: string;
 };
 
-const Landing: React.FC<LineProps> = ({
+const Landing: React.FC<LandingProps> = ({
 stroke = "black",
-  strokeWidth = 2,
+strokeWidth = 2,
+imageUrl,
 }) => {
   return (
 <svg
@@ -18,7 +20,7 @@ stroke = "black",
       style={{ display: "block", position: "absolute" }}         // avoids scrollbars from inline gaps
     >
       <line
-        x1="100" y1="9"                    // top-right
+        x1="100" y1="8.5"                    // top-right
         x2="0"   y2="100"                  // bottom-left
         stroke={stroke}
         strokeWidth={strokeWidth}

@@ -8,7 +8,7 @@ function Home() {
     <Landing />
       <div style={{ height: "70vh" }}></div>
       <ShrinkOnScroll
-        threshold={300}
+        threshold={400}
         largeSize="350px"
         smallSize="100px"
         className="d-flex flex-row justify-content-end"

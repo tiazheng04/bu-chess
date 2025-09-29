@@ -26,7 +26,7 @@ function Navbar({ onNavStateChange } : NavbarProps) {
           top: 0,
           left: 0,
           width: "100%",
-          height: "9vh",
+          height: "8.5vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
