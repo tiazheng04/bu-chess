@@ -99,7 +99,8 @@ function ShrinkOnScroll({
         position: shrink ? "sticky" : "fixed",
         top: isSticky ? "1vh" : undefined,
         marginLeft: "auto",
-        width: "fit-content"
+        width: "fit-content",
+        zIndex: 1001, // make sure it stays on top of other content
         
       }}
     >

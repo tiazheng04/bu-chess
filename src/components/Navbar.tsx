@@ -26,12 +26,12 @@ function Navbar({ onNavStateChange } : NavbarProps) {
           top: 0,
           left: 0,
           width: "100%",
-          height: "60px",
+          height: "9vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "rgba(0,0,0,0.05)",
-          borderBottom: "1px solid red",
+          background: "#f2f2f2",
+          borderBottom: "1px solid red", 
         }}
       >
         {/* hamburger icon which remains fixed on the top left corner */}

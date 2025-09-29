@@ -1,9 +1,11 @@
 import ShrinkOnScroll from "./components/ShrinkOnScroll";
 import terrier from "./assets/bu-chess-logo.png";
+import Landing from "./components/landing";
 
 function Home() {
   return (
     <>
+    <Landing />
       <div style={{ height: "70vh" }}></div>
       <ShrinkOnScroll
         threshold={300}
