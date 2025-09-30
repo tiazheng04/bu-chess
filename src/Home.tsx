@@ -1,12 +1,16 @@
 import ShrinkOnScroll from "./components/ShrinkOnScroll";
 import terrier from "./assets/bu-chess-logo.png";
+import landing from "./assets/landing.jpg";
+import Landing from "./components/landing";
 
 function Home() {
   return (
     <>
+      <Landing imageUrl={landing} />
+
       <div style={{ height: "70vh" }}></div>
       <ShrinkOnScroll
-        threshold={300}
+        threshold={400}
         largeSize="350px"
         smallSize="100px"
         className="d-flex flex-row justify-content-end"
