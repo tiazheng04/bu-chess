@@ -18,14 +18,12 @@ function ContactUs() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(null);
 
-  // ADDED: basic client-side validation helper (optional)
   const isValid = () =>
     formData.name.trim() &&
     /\S+@\S+\.\S+/.test(formData.email) &&
     formData.subject.trim() &&
     formData.message.trim();
 
-  // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -34,7 +32,6 @@ function ContactUs() {
     }));
   };
 
-  // CHANGED: submit to Formspree via fetch
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -47,7 +44,6 @@ function ContactUs() {
     }
     
     try {
-      // Build FormData that Formspree expects
       const payload = new FormData();
       payload.append("name", formData.name);
       payload.append("email", formData.email); 
@@ -60,7 +56,7 @@ function ContactUs() {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
         body: payload,
-        headers: { Accept: "application/json" } // ADDED: ensures JSON response
+        headers: { Accept: "application/json" }
       });
 
       if (res.ok) {
@@ -68,7 +64,6 @@ function ContactUs() {
         setFormData({ name: "", email: "", subject: "", message: "" });
         setSubmitStatus("success");
       } else {
-        // Formspree returns 422 for validation errors, surface message if present
         try {
           const data = await res.json();
           console.error("Formspree error:", data);
@@ -115,11 +110,12 @@ function ContactUs() {
           <div style={{
             width: "100%",
             padding: "2rem",
-            backgroundColor: "#f8f8f8",
+            marginTop: "3vh",
+            backgroundColor: "#fef1f1ff",
             borderRadius: "10px",
             boxShadow: "0 2px 12px rgba(0,0,0,0.08)"
           }}>
-            <h2 style={{ marginBottom: "1.5rem" }}>Send us a message</h2>
+            <h2 style={{ marginBottom: "2.5vh" }}>Contact BU Chess</h2>
             
             {submitStatus === "success" && (
               <div style={{ 
